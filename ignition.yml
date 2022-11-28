@@ -25,7 +25,6 @@ systemd:
         ExecStart=rpm-ostree install git docker-compose htop --reboot
         [Install]
         WantedBy=multi-user.target
-
     - name: var-vm-swapfile.swap
       enabled: true
       contents: |
