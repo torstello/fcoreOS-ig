@@ -8,7 +8,7 @@ Ignition configuration file
 
   1. Get file "ignition.yml" and replace the parameters in environment variables as your actual
   2. Convert the YML file into a JSON Ignition config:
-     docker run -i --rm quay.io/coreos/fcct --pretty --strict < ignition.yaml > ignition.ign
+     docker run -i --rm quay.io/coreos/fcct --pretty --strict < ignition.yml > ignition.ign
   3. Validate config:
      docker run -i --rm quay.io/coreos/ignition-validate - < ignition.ign
   
