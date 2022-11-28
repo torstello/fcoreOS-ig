@@ -1,0 +1,73 @@
+{
+  "ignition": {
+    "version": "3.3.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "sudo",
+          "wheel",
+          "docker"
+        ],
+        "name": "coreos",
+        "passwordHash": "$5$QQx.D1549w$INeU4...OyuLyUbdi1AyA",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3Nza...QP0MTkX0= core@example.com"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "path": "/etc/ssh/sshd_config.d/20-enable-passwords.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,%23%20Fedora%20CoreOS%20disables%20SSH%20password%20login%20by%20default.%0A%23%20Enable%20it.%0A%23%20This%20file%20must%20sort%20before%2040-disable-passwords.conf.%0APasswordAuthentication%20yes%0A"
+        },
+        "mode": 420
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/hostname",
+        "contents": {
+          "compression": "",
+          "source": "data:,coreos"
+        }
+      },
+      {
+        "path": "/etc/NetworkManager/system-connections/eth0.nmconnection",
+        "contents": {
+          "compression": "",
+          "source": "data:,%5Bconnection%5D%0Aid%3Deth0%0Atype%3Dethernet%0Ainterface-name%3Deth0%0A%5Bipv4%5D%0Aaddress1%3D192.168.1.10%2F24%2C192.168.1.1%0Adns%3D8.8.8.8%3B%0Adns-search%3D%0Amay-fail%3Dfalse%0Amethod%3Dmanual%0A"
+        },
+        "mode": 384
+      }
+    ],
+    "links": [
+      {
+        "path": "/etc/localtime",
+        "target": "../usr/share/zoneinfo/Asia/Ho_Chi_Minh"
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Install packages\nConditionFirstBoot=yes\nWants=network-online.target\nAfter=network-online.target\nAfter=multi-user.target\n[Service]\nType=oneshot\nExecStart=rpm-ostree install git docker-compose htop --reboot\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "install-rpms.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Turn on swap\nRequires=create-swapfile.service\nAfter=create-swapfile.service\n[Swap]\nWhat=/var/vm/swapfile\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "var-vm-swapfile.swap"
+      },
+      {
+        "contents": "[Unit]\nDescription=Create a swapfile\nRequiresMountsFor=/var\nConditionPathExists=!/var/vm/swapfile\n[Service]\nType=oneshot\nExecStart=/usr/bin/mkdir -p /var/vm\nExecStart=/usr/bin/fallocate -l 1024m /var/vm/swapfile\nExecStart=/usr/bin/chmod 600 /var/vm/swapfile\nExecStart=/usr/sbin/mkswap /var/vm/swapfile\nRemainAfterExit=true\n",
+        "name": "create-swapfile.service"
+      }
+    ]
+  }
+}
