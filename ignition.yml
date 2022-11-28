@@ -57,9 +57,8 @@ storage:
       target: ../usr/share/zoneinfo/Asia/Ho_Chi_Minh
   files:
     - path: /etc/sysctl.d/80-swappiness.conf
-      filesystem: root
       contents:
-      inline: "vm.swappiness=10"
+        inline: "vm.swappiness=10"
     - path: /etc/ssh/sshd_config.d/20-enable-passwords.conf
       mode: 0644
       contents:
