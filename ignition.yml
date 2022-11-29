@@ -70,14 +70,14 @@ storage:
       overwrite: true
       contents:
         inline: coreos
-    - path: /etc/NetworkManager/system-connections/eth0.nmconnection
+    - path: /etc/NetworkManager/system-connections/ens2.nmconnection
       mode: 0600
       contents:
         inline: |
           [connection]
-          id=eth0
+          id=ens2
           type=ethernet
-          interface-name=eth0
+          interface-name=ens2
           [ipv4]
           address1=192.168.1.10/24,192.168.1.1
           dns=8.8.8.8;
