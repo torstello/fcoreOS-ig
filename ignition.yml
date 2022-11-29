@@ -3,7 +3,7 @@ version: 1.4.0
 
 passwd:
   users:
-    - name: coreos
+    - name: core
       password_hash: "$5$QQx.D1549w$INeU4...OyuLyUbdi1AyA"
       ssh_authorized_keys:
         - "ssh-rsa AAAAB3Nza...QP0MTkX0= core@example.com"
