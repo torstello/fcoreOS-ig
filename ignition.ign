@@ -71,7 +71,7 @@
         "name": "var-vm-swapfile.swap"
       },
       {
-        "contents": "[Unit]\nDescription=Create a swapfile\nRequiresMountsFor=/var\nConditionPathExists=!/var/vm/swapfile        \n[Service]\nType=oneshot\nExecStart=/usr/bin/mkdir -p /var/vm\nExecStart=/usr/bin/fallocate -l 1024m /var/vm/swapfile\nExecStart=/usr/bin/chmod 600 /var/vm/swapfile\nExecStart=/usr/sbin/mkswap /var/vm/swapfile\nRemainAfterExit=true\n",
+        "contents": "[Unit]\nDescription=Create a swapfile\nRequiresMountsFor=/var\nConditionPathExists=!/var/vm/swapfile\n[Service]\nType=oneshot\nExecStart=/usr/bin/mkdir -p /var/vm\nExecStart=/usr/bin/fallocate -l 1024m /var/vm/swapfile\nExecStart=/usr/bin/chmod 600 /var/vm/swapfile\nExecStart=/usr/sbin/mkswap /var/vm/swapfile\nRemainAfterExit=true\n",
         "name": "create-swapfile.service"
       }
     ]
