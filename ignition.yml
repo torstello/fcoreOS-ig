@@ -41,7 +41,7 @@ systemd:
         [Unit]
         Description=Create a swapfile
         RequiresMountsFor=/var
-        ConditionPathExists=!/var/vm/swapfile        
+        ConditionPathExists=!/var/vm/swapfile
         [Service]
         Type=oneshot
         ExecStart=/usr/bin/mkdir -p /var/vm
