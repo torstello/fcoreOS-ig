@@ -3,10 +3,10 @@ version: 1.4.0
 
 passwd:
   users:
-    - name: core
+    - name: ts
       password_hash: "$5$QQx.D1549w$INeU4...OyuLyUbdi1AyA"
       ssh_authorized_keys:
-        - "ssh-rsa AAAAB3Nza...QP0MTkX0= core@example.com"
+        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+L6tT62loQSnup/jhbBeuGeXzmWws0frhWtpHxm9sJ ts@loki"
       groups: [ sudo, docker ]
 
 systemd:
@@ -22,7 +22,7 @@ systemd:
         After=multi-user.target
         [Service]
         Type=oneshot
-        ExecStart=rpm-ostree install git docker-compose htop --reboot
+        ExecStart=rpm-ostree install git fish fd-find ripgrep fzf git pass py3status rsync tmux xz i3 htop --reboot
         [Install]
         WantedBy=multi-user.target
     - name: var-vm-swapfile.swap
@@ -53,34 +53,26 @@ systemd:
 storage:
   links:
     - path: /etc/localtime
-      target: ../usr/share/zoneinfo/Asia/Ho_Chi_Minh
+      target: ../usr/share/zoneinfo/Europe/Madrid
   files:
     - path: /etc/sysctl.d/80-swappiness.conf
       contents:
         inline: "vm.swappiness=10"
-    - path: /etc/ssh/sshd_config.d/20-enable-passwords.conf
-      mode: 0644
-      contents:
-        inline: |
-          # Fedora CoreOS disables SSH password login by default.
-          # Enable it.
-          # This file must sort before 40-disable-passwords.conf.
-          PasswordAuthentication yes
     - path: /etc/hostname
       overwrite: true
       contents:
-        inline: coreos
-    - path: /etc/NetworkManager/system-connections/ens2.nmconnection
-      mode: 0600
-      contents:
-        inline: |
-          [connection]
-          id=ens2
-          type=ethernet
-          interface-name=ens2
-          [ipv4]
-          address1=192.168.1.10/24,192.168.1.1
-          dns=8.8.8.8;
-          dns-search=
-          may-fail=false
-          method=manual
+        inline: heimdall
+    # - path: /etc/NetworkManager/system-connections/ens2.nmconnection
+    #   mode: 0600
+    #   contents:
+    #     inline: |
+    #       [connection]
+    #       id=ens2
+    #       type=ethernet
+    #       interface-name=ens2
+    #       [ipv4]
+    #       address1=192.168.1.100/24,192.168.1.1
+    #       dns=8.8.8.8;
+    #       dns-search=
+    #       may-fail=false
+    #       method=manual

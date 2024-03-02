@@ -9,10 +9,10 @@
           "sudo",
           "docker"
         ],
-        "name": "core",
+        "name": "ts",
         "passwordHash": "$5$QQx.D1549w$INeU4...OyuLyUbdi1AyA",
         "sshAuthorizedKeys": [
-          "ssh-rsa AAAAB3Nza...QP0MTkX0= core@example.com"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+L6tT62loQSnup/jhbBeuGeXzmWws0frhWtpHxm9sJ ts@loki"
         ]
       }
     ]
@@ -27,41 +27,25 @@
         }
       },
       {
-        "path": "/etc/ssh/sshd_config.d/20-enable-passwords.conf",
-        "contents": {
-          "compression": "",
-          "source": "data:,%23%20Fedora%20CoreOS%20disables%20SSH%20password%20login%20by%20default.%0A%23%20Enable%20it.%0A%23%20This%20file%20must%20sort%20before%2040-disable-passwords.conf.%0APasswordAuthentication%20yes%0A"
-        },
-        "mode": 420
-      },
-      {
         "overwrite": true,
         "path": "/etc/hostname",
         "contents": {
           "compression": "",
-          "source": "data:,coreos"
+          "source": "data:,heimdall"
         }
-      },
-      {
-        "path": "/etc/NetworkManager/system-connections/ens2.nmconnection",
-        "contents": {
-          "compression": "",
-          "source": "data:,%5Bconnection%5D%0Aid%3Dens2%0Atype%3Dethernet%0Ainterface-name%3Dens2%0A%5Bipv4%5D%0Aaddress1%3D192.168.1.10%2F24%2C192.168.1.1%0Adns%3D8.8.8.8%3B%0Adns-search%3D%0Amay-fail%3Dfalse%0Amethod%3Dmanual%0A"
-        },
-        "mode": 384
       }
     ],
     "links": [
       {
         "path": "/etc/localtime",
-        "target": "../usr/share/zoneinfo/Asia/Ho_Chi_Minh"
+        "target": "../usr/share/zoneinfo/Europe/Madrid"
       }
     ]
   },
   "systemd": {
     "units": [
       {
-        "contents": "[Unit]\nDescription=Install packages\nConditionFirstBoot=yes\nWants=network-online.target\nAfter=network-online.target\nAfter=multi-user.target\n[Service]\nType=oneshot\nExecStart=rpm-ostree install git docker-compose htop --reboot\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Install packages\nConditionFirstBoot=yes\nWants=network-online.target\nAfter=network-online.target\nAfter=multi-user.target\n[Service]\nType=oneshot\nExecStart=rpm-ostree install git fish fd-find ripgrep fzf git pass py3status rsync tmux xz i3 htop --reboot\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "install-rpms.service"
       },
