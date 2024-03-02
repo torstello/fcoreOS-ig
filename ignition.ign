@@ -45,7 +45,7 @@
   "systemd": {
     "units": [
       {
-        "contents": "[Unit]\nDescription=Install packages\nConditionFirstBoot=yes\nWants=network-online.target\nAfter=network-online.target\nAfter=multi-user.target\n[Service]\nType=oneshot\nExecStart=rpm-ostree install git fish fd-find ripgrep fzf git pass py3status rsync tmux xz i3 htop --reboot\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Install packages\nConditionFirstBoot=yes\nWants=network-online.target\nAfter=network-online.target\nAfter=multi-user.target\n[Service]\nType=oneshot\nExecStart=rpm-ostree install git fish fd-find ripgrep fzf git pass py3status tmux htop --reboot\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "install-rpms.service"
       },

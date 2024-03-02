@@ -22,7 +22,7 @@ systemd:
         After=multi-user.target
         [Service]
         Type=oneshot
-        ExecStart=rpm-ostree install git fish fd-find ripgrep fzf git pass py3status rsync tmux xz i3 htop --reboot
+        ExecStart=rpm-ostree install git fish fd-find ripgrep fzf git pass py3status tmux htop --reboot
         [Install]
         WantedBy=multi-user.target
     - name: var-vm-swapfile.swap
@@ -62,16 +62,16 @@ storage:
       overwrite: true
       contents:
         inline: heimdall
-    # - path: /etc/NetworkManager/system-connections/ens2.nmconnection
+    # - path: /etc/NetworkManager/system-connections/enp0s20u1.nmconnection
     #   mode: 0600
     #   contents:
     #     inline: |
     #       [connection]
-    #       id=ens2
+    #       id=enp0s20u1
     #       type=ethernet
-    #       interface-name=ens2
+    #       interface-name=enp0s20u1
     #       [ipv4]
-    #       address1=192.168.1.100/24,192.168.1.1
+    #       address1=192.168.1.111/24,192.168.1.1
     #       dns=8.8.8.8;
     #       dns-search=
     #       may-fail=false
