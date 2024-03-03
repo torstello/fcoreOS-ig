@@ -1,0 +1,62 @@
+{
+  "ignition": {
+    "version": "3.4.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "sudo",
+          "docker"
+        ],
+        "name": "ts",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+L6tT62loQSnup/jhbBeuGeXzmWws0frhWtpHxm9sJ ts@loki"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "path": "/etc/sysctl.d/80-swappiness.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,vm.swappiness%3D10"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/hostname",
+        "contents": {
+          "compression": "",
+          "source": "data:,thor"
+        }
+      }
+    ],
+    "links": [
+      {
+        "path": "/etc/localtime",
+        "target": "../usr/share/zoneinfo/Europe/Madrid"
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Install packages\nConditionFirstBoot=yes\nWants=network-online.target\nAfter=network-online.target\nAfter=multi-user.target\n[Service]\nType=oneshot\nExecStart=rpm-ostree install -y git fish fd-find ripgrep fzf git pass tmux htop --reboot\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "install-rpms.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Turn on swap\nRequires=create-swapfile.service\nAfter=create-swapfile.service\n[Swap]\nWhat=/var/vm/swapfile\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "var-vm-swapfile.swap"
+      },
+      {
+        "contents": "[Unit]\nDescription=Create a swapfile\nRequiresMountsFor=/var\nConditionPathExists=!/var/vm/swapfile\n[Service]\nType=oneshot\nExecStart=/usr/bin/mkdir -p /var/vm\nExecStart=/usr/bin/fallocate -l 1024m /var/vm/swapfile\nExecStart=/usr/bin/chmod 600 /var/vm/swapfile\nExecStart=/usr/sbin/mkswap /var/vm/swapfile\nRemainAfterExit=true\n",
+        "name": "create-swapfile.service"
+      }
+    ]
+  }
+}

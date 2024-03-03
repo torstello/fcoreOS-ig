@@ -1,0 +1,10 @@
+{
+  "ignition": {
+    "config": {
+      "replace": {
+        "source": "https://github.com/torstello/fcoreOS-ig/raw/main/ignition-thor.ign"
+      }
+    },
+    "version": "3.4.0"
+  }
+}
