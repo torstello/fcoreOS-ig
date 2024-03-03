@@ -11,7 +11,7 @@
         ],
         "name": "ts",
         "sshAuthorizedKeys": [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+L6tT62loQSnup/jhbBeuGeXzmWws0frhWtpHxm9sJ ts@loki"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+L6tT62loQSnup/jhbBeuGeXzmWws0frhWtpHxm9sJ"
         ]
       }
     ]

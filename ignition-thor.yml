@@ -6,7 +6,7 @@ passwd:
     - name: ts
       ssh_authorized_keys:
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+L6tT62loQSnup/jhbBeuGeXzmWws0frhWtpHxm9sJ
-      password_hash: $y$j9T$34rxYq6Y4FmuMsnBkAAAz/$mRKKhskKmocuQop4bZsXK/EyvAx2NZVOISRqz06ByD4
+      # password_hash: $y$j9T$34rxYq6Y4FmuMsnBkAAAz/$mRKKhskKmocuQop4bZsXK/EyvAx2NZVOISRqz06ByD4
       groups: [ sudo, docker ]
 
 systemd:
