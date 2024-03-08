@@ -1,0 +1,38 @@
+{
+  "ignition": {
+    "version": "3.3.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "sudo",
+          "docker"
+        ],
+        "name": "ts",
+        "passwordHash": "$5$QQx.D1549w$INeU4...OyuLyUbdi1AyA",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+L6tT62loQSnup/jhbBeuGeXzmWws0frhWtpHxm9sJ ts@loki"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "overwrite": true,
+        "path": "/etc/hostname",
+        "contents": {
+          "compression": "",
+          "source": "data:,loki"
+        }
+      }
+    ],
+    "links": [
+      {
+        "path": "/etc/localtime",
+        "target": "../usr/share/zoneinfo/Europe/Madrid"
+      }
+    ]
+  }
+}
