@@ -1,6 +1,6 @@
 {
   "ignition": {
-    "version": "3.3.0"
+    "version": "3.4.0"
   },
   "passwd": {
     "users": [
@@ -10,7 +10,6 @@
           "docker"
         ],
         "name": "ts",
-        "passwordHash": "$5$QQx.D1549w$INeU4...OyuLyUbdi1AyA",
         "sshAuthorizedKeys": [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+L6tT62loQSnup/jhbBeuGeXzmWws0frhWtpHxm9sJ ts@loki"
         ]

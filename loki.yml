@@ -1,14 +1,12 @@
 variant: fcos
-version: 1.4.0
+version: 1.5.0
 
 passwd:
   users:
     - name: ts
-      password_hash: "$5$QQx.D1549w$INeU4...OyuLyUbdi1AyA"
       ssh_authorized_keys:
         - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+L6tT62loQSnup/jhbBeuGeXzmWws0frhWtpHxm9sJ ts@loki"
       groups: [ sudo, docker ]
-
 
 storage:
   links:
